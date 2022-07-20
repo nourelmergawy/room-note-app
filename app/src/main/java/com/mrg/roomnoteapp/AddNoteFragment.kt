@@ -16,7 +16,6 @@ import androidx.lifecycle.Observer
 import com.mrg.roomnoteapp.db.Note
 
 class AddNoteFragment(val adpater : RecyclerViewAdapter) : Fragment() {
-    lateinit var viewModal: NoteViewModel
     lateinit var addBtn : Button
     lateinit var etext : EditText
      var mList: ArrayList<Note> ?=null
@@ -39,6 +38,7 @@ class AddNoteFragment(val adpater : RecyclerViewAdapter) : Fragment() {
             note = etext.text.toString()
             // This will pass the ArrayList to our Adapter
             Toast.makeText(context,note,LENGTH_LONG).show()
+
             val intent = Intent(activity, MainActivity::class.java)
             intent.putExtra("noteBody",note)
             startActivity(intent)

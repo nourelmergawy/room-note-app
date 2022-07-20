@@ -15,17 +15,18 @@
         android:padding="5dp"
         android:text="TextViewTextViewTextViewTextViewTextViewTextView"
         android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@+id/checkBox"
+        app:layout_constraintStart_toEndOf="@+id/delete_btn"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <Button
+        android:id="@+id/delete_btn"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/ic_baseline_delete_24"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

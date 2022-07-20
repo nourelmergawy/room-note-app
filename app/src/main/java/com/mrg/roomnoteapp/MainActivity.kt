@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.provider.ContactsContract
 import android.util.Log
 import android.widget.Button
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var btn : FloatingActionButton
     lateinit var viewModal: NoteViewModel
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -36,6 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         // ArrayList of class ItemsViewModel
         val data = ArrayList<Note>()
+        //data.addAll(viewModal.allNotes)
 
         // This will pass the ArrayList to our Adapter
         val adapter = RecyclerViewAdapter(data)
@@ -53,16 +56,16 @@ class MainActivity : AppCompatActivity() {
 
         val test=intent.getStringExtra("noteBody")
         Log.d(TAG, "onCreate: ${test}")
+        if(test != null){
+            viewModal.addNote(Note(0,test))
+        }
         viewModal.allNotes.observe(this, Observer { list ->
             list?.let {
                 // on below line we are updating our list.
 
-                adapter.updateList(data)
-                Log.d(TAG, "onCreate: test2")
+                adapter.updateList(it)
                 btn.setOnClickListener {
-
                     callFrag(adapter)
-
                 }
             }
         })
@@ -71,7 +74,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun callFrag(adapter: RecyclerViewAdapter) {
        supportFragmentManager.beginTransaction().add(R.id.fragment_item,AddNoteFragment(adapter)).commit()
-        Log.d(TAG, "onCreate: test1")
+        Log.d(TAG, "onCreate: callFrag")
 
     }
 }
